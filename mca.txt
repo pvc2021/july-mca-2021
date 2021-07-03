@@ -1,0 +1,219 @@
+Endpoints:
+
+1)RESTful Webservices (Smart Endpoints)
+  - HTTP/HTTPS
+
+2)Dumps Pipes :(MQ)  JMS
+  - Queue
+  - Topic
+
+AMQP
+------------------------------------------
+
+1.storeapp: (2.3.8.RELEASE)
+    -Starters:
+          -H2
+          -Spring Web
+          -Spring Boot Actuator
+          -Spring Boot DevTools
+
+
+--------------------------------------------
+
+Spring IOC
+                  @Component
+
+@Controller        @Service     @Reposiotory
+@RestController
+
+----------------------------------------------------
+/products               GET
+/products               POST
+/products/1             PUT
+/products/1             GET
+/products/1             DELETE
+-------------------------------------------------------
+
+
+
+Day 2:
+
+Spring Core  - environment -application.properties
+
+1000 Microservices
+   - application.properties (dev)
+
+1000 .properties fo
+
+    - Dev,Test,Prod
+
+3000 .properties    
+
+----------------------------------------------
+application-dev.properties
+
+/application/dev
+/application/dev/master
+
+application-prod.properties
+
+/application/prod
+/application/prod/master
+
+product-service-prod.properties
+
+/product-service/prod
+-----------------------------------------------------
+https://springio.projects/spring-cloud-config
+
+Spring Cloud Config :(Distrubuted Configuration)
+Spring Cloud Config provides server and client-side support for externalized configuration in distrubuted system.
+
+Features:
+
+Spring Cloud Config Server features:
+ a)HTTP,resource-based API for external-configuration (name-value pairs or equivalent YAML content)
+ b)Encrypt and decrypt property values (symmetric & asymmetric)
+ c)Embeddable easily in a Spring Boot application using @EnableConfigServer
+
+
+Config Client features (for Spring applications)
+a) Bind to config server & initialize Spring Environment with remote property sources.
+b)Encrypt & decrypt property values (symmetrice or asymmetric)
+
+
+Steps:
+
+Step 1: Setup the Git Reposiotry & upload application.properties file
+
+https://github.com/pvc2021/spring-boot-configuration
+
+------------------------------
+
+Step 2:
+Spring Cloud Config Server:
+
+2.1) Create new project (cloudserver-config)
+   -Select starters
+    -Config Server
+    -Spring Boot Actuator
+
+2.2)Add @EnableConfigServer in Application Class (main method)
+
+2.3) In application properties
+
+server.port=8888
+spring.cloud.config.server.git.uri=https://github.com/pradeepch82/spring-cloud
+
+2.4)Start the Application
+
+2.5)Check it
+http://localhost:8888/{name}/{label}
+http://localhost:8888/application/default/master
+ -application.properties
+
+
+
+http://localhost:8888/application-default.properties
+http://localhost:8888/application-default.json
+
+http://localhost:8888/application-dev.properties
+http://localhost:8888/application-dev.json
+
+
+
+Step 3:
+Spring cloud Config Client :(product-service) 
+
+3.1)Add spring-cloud-starter-confing starter in pom.xml
+   -Config Client
+3.2) In application.properties:
+    server.port=8080 
+    spring.cloud.config.uri=http://localhost:8888
+3.3)Start the Config Server
+
+3.4)Then Start the storeapp microservice
+------------------------------------------
+1000 Microservice
+-Dev,Test,Prod           
+3000 .properties
+
+dev - Profile (H2)
+application-dev.properties
+prod -Profile (MySQL)
+application-prod.properties
+
+----------------------------
+http://localhost:8888/application/dev/master
+http://localhost:8888/application/prod/master
+
+-------------------------------
+VM Argument
+  -Dspring.profiles.active=dev    in VM Argument
+  -Dspring.profiles.active=prod    in VM Argument
+
+Config Client <---> Config server  <---> Github
+        N               1
+
+-------------------------------------------------
+Renamed
+application-dev.properties
+application-prod.properties
+
+to 
+
+product-service-dev.properties
+producct-service-prod.properties
+
+----------------------------------------
+
+Test Config server
+
+
+http://localhost:8888/product-service/dev/master
+http://localhost:8888/product-service/prod/master
+
+---------------------------------------------
+Storeapp:
+
+In application.properties
+
+spring.application.name=productservice
+
+
+VM Argument
+  -Dspring.profiles.active=dev    in VM Argument
+  -Dspring.profiles.active=prod    in VM Argument
+
+-------------------------------------------------
+http://localhost:8080/actuator/env
+
+2 Solution
+1)Restart the application
+
+2)Spring Cloud Config Client  
+    -Actuator - /refresh
+
+
+Steps to enable Actuator:
+
+1)Add the dependency in pom.xml
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-atuator</artifactId>
+</dependency>
+
+
+2)In application.properties file
+management.endpoints.web.exposure.include=*
+
+3)Exposing 15 Endpoints(s) beneath base path '/actuator'
+  -actuator/refresh/   (trigger)
+
+- POST method
+
+POSTMAN
+      -POST  -actuator/refresh
+
+
+
