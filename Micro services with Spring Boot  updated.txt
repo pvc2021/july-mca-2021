@@ -486,14 +486,15 @@ For building a Spring Boot Admin Server we need to add the below dependencies in
 
 Maven users can add the below dependencies in your pom.xml file -
 
-<dependency>
-   <groupId>de.codecentric</groupId>
-   <artifactId>spring-boot-admin-server</artifactId>
-</dependency>
-<dependency>
-   <groupId>de.codecentric</groupId>
-   <artifactId>spring-boot-admin-server-ui</artifactId>
-</dependency>
+Spring Boot Version
+===================
+
+2.3.9.RELEASE
+
+               <dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-server</artifactId>
+		</dependency>
 
 
 package com.tutorialspoint.adminserver;
@@ -594,10 +595,10 @@ Make sure Spring cloud Eureka server dependency is added in your build configura
 
 The code for Maven user dependency is shown below -
 
-<dependency>
-<groupId>org.springframework.cloud</groupId>
-   <artifactId>spring-cloud-starter-eureka-server</artifactId>
-</dependency>
+               <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		</dependency>
 
 
 Service Registration with Eureka
@@ -609,10 +610,10 @@ First, you need to add the following dependencies in our build configuration fil
 
 Maven users can add the following dependencies into the pom.xml file -
 
-<dependency>
-   <groupId>org.springframework.cloud</groupId>
-   <artifactId>spring-cloud-starter-eureka</artifactId>
-</dependency>
+                 <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 
 
 Now, we need to add the @EnableEurekaClient annotation in the main Spring Boot application class file. The @EnableEurekaClient annotation makes your Spring Boot application act as a Eureka client.
