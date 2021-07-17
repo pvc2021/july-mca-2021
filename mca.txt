@@ -217,3 +217,19 @@ POSTMAN
 
 
 
+mca-day5
+=========
+config-server    : 8888
+admin-server     : 9999
+zipkin-server    : 9041 
+eureka-server    : 8761
+product-service  : 1111
+customer-service : 2222
+api-gateway      : 8765
+
+
+To access Hystrix Dashb board   :http://localhost:9995/hystrix
+
+http://www.masterspringboot.com/cloud/netflix/configuring-hystrix-dashboard-in-your-spring-boot-application/
+
+
