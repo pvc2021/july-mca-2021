@@ -219,17 +219,49 @@ POSTMAN
 
 mca-day5
 =========
-config-server    : 8888
-admin-server     : 9999
-zipkin-server    : 9041 
-eureka-server    : 8761
-product-service  : 1111
-customer-service : 2222
-api-gateway      : 8765
+
+
+https://microservices.io/patterns/client-side-discovery.html
+
+
+config-server           : 8888
+admin-server            : 9999
+zipkin-server           : 9041 
+eureka-server           : 8761
+product-service         : 1111
+customer-service        : 2222
+api-gateway             : 8765
+consumer-ribbon-hystrix : 9995
+
 
 
 To access Hystrix Dashb board   :http://localhost:9995/hystrix
 
 http://www.masterspringboot.com/cloud/netflix/configuring-hystrix-dashboard-in-your-spring-boot-application/
+
+
+mca-day6
+=========
+
+https://microservices.io/patterns/client-side-discovery.html
+
+
+Spring Cloud OpenFeign
+========================
+This project provides OpenFeign integrations for Spring Boot apps through autoconfiguration and binding to the Spring Environment and other Spring programming model idioms.
+
+Features
+Declarative REST Client: Feign creates a dynamic implementation of an interface decorated with JAX-RS or Spring MVC annotations
+
+
+config-server               : 8888
+admin-server                : 9999
+zipkin-server               : 9041 
+eureka-server               : 8761
+product-service             : 1111
+customer-service            : 2222
+api-gateway                 : 8765
+consumer-ribbon-hystrix     : 9995
+consumer-openfeign-hystrix  : 9994
 
 
