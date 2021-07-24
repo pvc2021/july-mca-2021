@@ -221,6 +221,7 @@ mca-day5
 =========
 
 
+
 https://microservices.io/patterns/client-side-discovery.html
 
 
@@ -264,4 +265,96 @@ api-gateway                 : 8765
 consumer-ribbon-hystrix     : 9995
 consumer-openfeign-hystrix  : 9994
 
+
+mca-day7    :24-July-2021
+============================
+JMS (Java Messaging Service) :To develop a java application to send and recevie messages in synchronus and asynchronus way 
+
+
+Types of commmuncation
+=======================
+1.synchronus =>   Sender and receiver should be online (Phone calling)
+2.asynchronus =>  Sender and receiver need not be online (SMS,Whatsapp,Email)
+
+
+
+
+Types of Microservice Communication
+====================================
+There are two primary forms of communication between microservices that need to be solved for:
+
+Request-Response:  (Smart end points :REST API) =>http/https
+==================
+1.One service invokes another service by making an explicit request, usually to store or retrieve data.
+2.The service then expects a response: either a resource or an acknowledgement.
+
+Observer:  (Dumb Pipes) =>AQMQ 
+=========
+1.Event based, implicit invocation where one service publishes an event.
+2.one or more observers that were watching for that event respond to it by running logic asynchronously,
+   outside the awareness of the producer of the event.
+
+
+JMS Providers
+=============
+MOM (Message Oriented Middlware) 
+1.JBoss
+2.Oracle Weblogic,
+3.Active MQ :https://activemq.apache.org/components/classic/download/
+4.Rabbit MQ
+5.IBM Websphere,
+6.MQ Series
+
+
+
+1.Point to Point (One to One) =>Queue 
+  
+  One message will have one consumer only
+  
+2.Publisher to Subscriber (One to Many) =>Topic
+
+   One message will have one/more subscribers 
+  
+
+
+1.JMS in memory Active MQ
+    Producer ->
+	   JMSTemplate->
+	               ->Queue
+      	                   =>Consumer1
+                           =>Consumer2
+			   
+			 
+      
+
+2.JMS  stand alone Active MQ
+
+
+Active MQ Download :
+====================
+https://activemq.apache.org/components/classic/download/
+
+
+To start Active MQ
+c:\apache-activemq-5.15.8\bin>activemq start 
+
+Active MQ Web Console  :http://localhost:8161/
+  default username :admin
+  default password :admin
+    
+  
+The Spring AMQP project applies core Spring concepts to the development of AMQP-based messaging solutions. 
+It provides a "template" as a high-level abstraction for sending and receiving messages. 
+It also provides support for Message-driven POJOs with a "listener container". 
+These libraries facilitate management of AMQP resources while promoting the use of dependency injection and declarative configuration. 
+In all of these cases, you will see similarities to the JMS support in the Spring Framework.
+
+The project consists of two parts; spring-amqp is the base abstraction, and spring-rabbit is the RabbitMQ implementation.
+
+Features
+Listener container for asynchronous processing of inbound messages
+
+RabbitTemplate for sending and receiving messages
+
+RabbitAdmin for automatically declaring queues, exchanges and bindings
 
