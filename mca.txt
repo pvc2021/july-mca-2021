@@ -358,3 +358,97 @@ RabbitTemplate for sending and receiving messages
 
 RabbitAdmin for automatically declaring queues, exchanges and bindings
 
+mca-day8    :25-July-2021
+============================
+Docker
+https://github.com/pradeepch82/docker-repository
+
+
+
+mca-day9    :31-July-2021
+============================
+
+
+Docker file
+============
+Dockerfile : 
+
+A text file with instructions to build image
+Automation of Docker Image Creation
+
+FROM           :Base Image    
+MAINTAINER     :Author Name
+ENV            :Environment variable
+ADD            :ADD the files while buiding the image
+RUN            :To install libraries/packages (executed while building the image)
+ENTRYPOINT     :Executed at run time and we can not override the commands
+CMD            :Executed at run time and we can override by passing command line argument
+
+
+Step 1 : Create a file named Dockerfile
+Step 2 : Add instructions in Dockerfile
+Step 3 : Build dockerfile to create image
+Step 4 : Run image to create container
+
+Example  :Dockerfile
+
+FROM ubuntu
+MAINTAINER Pradeep Chinchole <pradeepch82@gmail.com>
+RUN apt-get update
+
+CMD ["echo", "Hello World..! from my first docker iamge1"]
+CMD ["echo", "Hello World..! from my first docker iamge2"]
+CMD ["echo", "Hello World..! from my first docker iamge3"]
+CMD ["echo", "Hello World..! from my first docker iamge4"]
+
+COMMANDS
+: docker build directoryOfDocekrfile
+: docker build -t ImageName:Tag directoryOfDocekrfile
+: docker run imageid 
+
+
+To create image from running container
+========================================
+
+docker run --name p-apache -d -p 9999:80 httpd
+
+echo  "<h1>Hello Welcome To Custom Apache Image</h1>" >  /usr/local/apache2/htdocs/index.html
+
+docker commit -m 'Index File Content Changed' -a 'Pradeep Chinchole <pradeepch82@gmail.com>' p-apache pradeepch82/apache:1.1
+
+docker login
+username :pradeepch82@gmail.com
+password :password
+
+docker push pradeepch82/apache:1.1
+
+docker run --name b-apache -p 4545:80 -d pradeepch82/apache:1.1
+
+
+
+Docker File Spring Boot Java Application
+================================================
+FROM openjdk:8
+ADD target/docker-spring-boot.jar docker-spring-boot.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","docker-spring-boot.jar"]
+
+======>
+
+docker build -t pradeepch82/product:1.1 .
+
+docker run --name p-product -p 8080:8080 pradeepch82/product:1.1
+
+
+
+docker login
+
+docker push pradeepch82/spring-docker-demo:1.1
+
+
+
+
+
+
+
+
